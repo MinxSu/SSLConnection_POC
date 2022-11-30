@@ -26,15 +26,12 @@
 > 上傳pem檔
 ![.pem](./docs/secret.jpg "upload .pem")
 <br/><br/>
-設定讀取路徑
-![.pem](./docs/value.jpg "upload .pem")
-<br/><br/>
 > ### Cloud Run 讀取 Secret
 > 指定 secret 磁區
-![.pem](./docs/path.jpg "set mountPath")
+![mount](./docs/path.jpg "set mountPath")
 <br/><br/>
-設定讀取路徑
-![.pem](./docs/CA.jpg "set CA")
+> 設定讀取路徑
+> ![env](./docs/env.jpg "set environment variables")
 > ### 程式碼
 > ```python
 > db_root_cert = os.getenv("CA")  # e.g. '/path/server-ca.pem'
