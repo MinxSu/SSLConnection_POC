@@ -1,0 +1,9 @@
+share/
+include/
+bin/
+config.ini
+.DS_Store
+.idea/
+__pycache__/
+lib/
+pem/
