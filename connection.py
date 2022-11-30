@@ -1,23 +1,24 @@
 import ssl
 import configparser
 import sqlalchemy
+import os
 
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-DB_HOST = config['PostgreSQL']['INSTANCE_HOST']  # e.g. '127.0.0.1' ('172.17.0.1' if deployed to GAE Flex)
-DB_USER = config['PostgreSQL']['DB_USER']  # e.g. 'my-db-user'
-DB_PASS = config['PostgreSQL']['DB_PASS']  # e.g. 'my-db-password'
-DB_NAME = config['PostgreSQL']['DB_NAME']  # e.g. 'my-database'
-DB_PORT = config['PostgreSQL']['DB_PORT']  # e.g. 5432
+DB_HOST = os.getenv("INSTANCE_HOST")  # e.g. '127.0.0.1' ('172.17.0.1' if deployed to GAE Flex)
+DB_USER = os.getenv("DB_USER")  # e.g. 'my-db-user'
+DB_PASS = os.getenv("DB_PASS")  # e.g. 'my-db-password'
+DB_NAME = os.getenv("DB_NAME")  # e.g. 'my-database'
+DB_PORT = os.getenv("DB_PORT")  # e.g. 5432
 
 def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
 
     # [END cloud_sql_postgres_sqlalchemy_connect_tcp]
     connect_args = {}
-    db_root_cert = 'pem/server-ca.pem'  # e.g. '/path/server-ca.pem'
-    db_cert = 'pem/client-cert.pem'  # e.g. '/path/client-cert.pem'
-    db_key = 'pem/client-key.pem'  # e.g. '/path/client-key.pem'
+    db_root_cert = os.getenv("CA")  # e.g. '/path/server-ca.pem'
+    db_cert = os.getenv("CERT") # e.g. '/path/client-cert.pem'
+    db_key = os.getenv("KEY")  # e.g. '/path/client-key.pem'
 
     ssl_context = ssl.SSLContext()
     ssl_context.verify_mode = ssl.CERT_REQUIRED
